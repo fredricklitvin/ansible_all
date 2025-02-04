@@ -1,0 +1,6 @@
+- name: lets see if this works
+  hosts: webserver
+  become: yes
+  roles:
+    - application
+    - configuration

@@ -1,0 +1,12 @@
+- name: Install web_server
+  dnf:
+    name: " {{ webserver_pkg }} "
+    state: latest
+  notify:
+    - start web_server
+- name: janga stuff
+  ansible.builtin.template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart web_server

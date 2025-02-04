@@ -1,0 +1,13 @@
+- name: download repo
+  git:
+    repo: "{{ git_src }}"
+    dest: "{{ git_dest }}"
+
+- name: use stuff
+  shell: /tmp/work/install --all
+  args:
+    executable: /bin/bash
+- name: Add a line to a file if the file does not exist, without passing regexp
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    line: eval "$(fzf --bash)"

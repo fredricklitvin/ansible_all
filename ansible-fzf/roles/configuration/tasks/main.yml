@@ -1,0 +1,23 @@
+  - name: create the users
+    user:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - "{{ readonly_user }}"
+      - "{{ write_user }}"
+  - name: Give read-only access to readonly_user
+    ansible.builtin.acl:
+      path: /tmp/work
+      entity: "{{ readonly_user }}"
+      etype: user
+      permissions: r
+      state: present
+
+  - name: Give write-only access to write_user
+    ansible.builtin.acl:
+      path: /tmp/work
+      entity: "{{ write_user }}"
+      etype: user
+      permissions: w
+      state: present
+     

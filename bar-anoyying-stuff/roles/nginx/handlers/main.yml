@@ -1,0 +1,9 @@
+- name: start web_server
+  service:
+    name: "{{ webserver_pkg }}"
+    state: started
+    enabled: yes
+- name: restart web_server
+  service:
+    name: "{{ webserver_pkg }}"
+    state: restarted

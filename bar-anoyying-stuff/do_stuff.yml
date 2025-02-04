@@ -1,0 +1,5 @@
+- name: start ngnix and more
+  hosts: webserver
+  become: yes
+  roles:
+    - nginx

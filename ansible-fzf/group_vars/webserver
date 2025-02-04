@@ -1,0 +1,5 @@
+git_dest: /tmp/work
+git_src: https://github.com/junegunn/fzf.git
+readonly_user: readonly_user 
+write_user: write_user
+
