@@ -1,0 +1,10 @@
+- name: start roles
+  hosts: tag_Role_jenkins
+  become: true
+  roles:
+    - jenkins
+- name: create slaces
+  hosts: tag_Role_web
+  become: true
+  roles:
+    - nginx

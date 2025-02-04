@@ -1,0 +1,12 @@
+- name: Gather EC2 public IP addresses
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Show EC2 public IP from hostvars
+      ansible.builtin.debug:
+        msg: "{{ hostvars[inventory_hostname]['public_ip_address'] }}"
+  
+- name: start roles 
+  hosts: tag_Role_web
+  roles:
+    - nginx

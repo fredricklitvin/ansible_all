@@ -1,0 +1,31 @@
+- name: get repo
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+- name: Import a key from a url
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+- name: install jenkins
+  dnf:
+    name:
+      - java-17-amazon-corretto
+      - jenkins
+    state: present
+- name: start service
+  service:
+    name: jenkins
+    state: started
+- name: make an ssh key  
+  openssh_keypair:
+    path: /tmp/id_ssh_rsa
+    mode: '0400'
+    owner: ec2-user
+    group: ec2-user
+
+- name: get the shh key
+  fetch:
+    src: /tmp/id_ssh_rsa.pub
+    dest: /tmp/id_ssh_rsa.pub1/
+    mode: pull
+

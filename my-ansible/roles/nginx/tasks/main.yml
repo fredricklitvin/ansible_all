@@ -1,0 +1,37 @@
+- name: get shh key
+  ansible.builtin.copy:
+    src: /tmp/id_ssh_rsa.pub1/ec2-54-234-249-254.compute-1.amazonaws.com/tmp/id_ssh_rsa.pub
+    dest:  ~/.ssh/authorized_keys
+    mode: '0700'
+
+- name: install dependencis
+  become: true
+  dnf:
+    name:
+    - git
+    - docker
+    - java
+    - nginx
+    state: latest
+
+- name : start dependencis
+  become: true
+  ansible.builtin.service:  
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop:
+    - docker
+    - nginx
+    
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: ec2-user
+    groups: docker
+    append: true
+
+- name: reboot
+  become: true
+  ansible.builtin.reboot:
+
