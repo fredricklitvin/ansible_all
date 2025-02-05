@@ -48,10 +48,10 @@ if [ "$ID_LIKE" == "fedora" ]; then
     echo "Using: sudo dnf install -y ansible"
     sudo dnf update
     sudo dnf install -y python3
-    sudo dnf install -y python3-pip3
+    sudo dnf install -y python3-pip
     sudo dnf install -y ansible
     ansible-galaxy collection install amazon.aws
-    pip3 install boto boto3 botocore
+    pip install boto boto3 botocore
     
   ## Use yum for 20 - 21
   elif [ $VERSION_ID -eq 20 ] || [ $VERSION_ID -eq 21 ]; then
@@ -59,9 +59,9 @@ if [ "$ID_LIKE" == "fedora" ]; then
     sudo yum update
     sudo yum -y install python3
     sudo yum -y install ansible
-    sudo yum install -y python3-pip3
+    sudo yum install -y python3-pip
     ansible-galaxy collection install amazon.aws
-    pip3 install boto boto3 botocore
+    pip install boto boto3 botocore
   else
     error_exit 
   fi
@@ -74,7 +74,7 @@ if [ "$ID_LIKE" == "centos" ]; then
     sudo yum install -y epel-release
     sudo yum install -y ansible
     sudo yum -y install python3
-    sudo yum install -y python3-pip3
+    sudo yum install -y python3-pip
     ansible-galaxy collection install amazon.aws
     pip install boto boto3 botocore
   else
